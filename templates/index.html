@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>PC Doctor</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<div class="container">
+  <h1>PC Doctor</h1>
+
+  <div class="card">
+    <p>System: <span id="system"></span></p>
+    <p>CPU: <span id="cpu"></span>%</p>
+    <p>RAM: <span id="ram"></span>%</p>
+    <p>Dysk: <span id="disk"></span>%</p>
+  </div>
+
+  <button onclick="loadData()">Odśwież</button>
+</div>
+
+<script>
+async function loadData() {
+  const res = await fetch("/api/status");
+  const data = await res.json();
+
+  document.getElementById("system").innerText = data.system;
+  document.getElementById("cpu").innerText = data.cpu;
+  document.getElementById("ram").innerText = data.ram;
+  document.getElementById("disk").innerText = data.disk;
+}
+
+loadData();
+</script>
+
+</body>
